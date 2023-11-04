@@ -1,42 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>User Information</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Link to your custom CSS file -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <header>
-        <h1>User Information</h1>
-    </header>
-    <main>
-        <section id="user-info">
-            <div>
-                <label for="ip-address">IP Address:</label>
-                <span id="ip-address">Fetching...</span>
-            </div>
-            <div>
-                <label for="location">Location:</label>
-                <span id="location">Fetching...</span>
-            </div>
-            <div>
-                <label for="timezone">Timezone:</label>
-                <span id="timezone">Fetching...</span>
+
+    <main class="index-main-page">
+        <!-- Section 1: Introduction -->
+        <section id="index-section-1">
+            <h1>Post Office Application</h1>
+            <p>This Application Allows you to extract information about the nearest Post Offices, based on your
+                location.</p>
+            <div class="img-container">
+                <!-- Image illustrating the concept -->
+                <img src="./post.svg" alt="img">
             </div>
         </section>
-        <section id="map">
-            <iframe id="google-map" width="600" height="450" frameborder="0" style="border:0" src="" allowfullscreen></iframe>
-        </section>
-        <section id="post-offices">
-            <button id="get-started-button">Get Started</button>
-            <label for="search-box">Search Post Offices:</label>
-            <input type="text" id="search-box" placeholder="Search by name or branch">
-            <ul id="post-office-list">
-                <li>Loading post office data...</li>
-            </ul>
+        <!-- Section 2: User Interaction -->
+        <section id="index-section-2">
+            <h1>Your Current IP Address is <span class="ip"></span></h1>
+            <!-- Button to initiate the application -->
+            <button id="get-started">Get Started</button>
         </section>
     </main>
-    <!-- Include your API key in the script tag below -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8nH8iWGdG31PusBw0XJTQt4h5v93B-zg&callback=initMap" async defer></script>
-    <script src="script.js"></script>
+
+    <!-- Include your JavaScript file -->
+    <script src="./js/script.js"></script>
 </body>
+
 </html>

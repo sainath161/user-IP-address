@@ -7,14 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const googleMap = document.getElementById("google-map");
     const getStartedButton = document.getElementById("get-started-button");
 
-    let userIP = null;
     let postOfficesData = [];
 
     getStartedButton.addEventListener("click", function () {
-        if (!userIP) {
-            fetchUserIPAddress();
-        }
-        fetchUserInformation(userIP);
+        fetchUserLocation();
     });
 
     searchBox.addEventListener("input", function () {
@@ -25,35 +21,39 @@ document.addEventListener("DOMContentLoaded", function () {
         displayPostOffices(filteredOffices, postOfficeList);
     });
 
-    function fetchUserIPAddress() {
-        fetch('https://api.ipify.org?format=json')
-            .then(response => response.json())
-            .then(data => {
-                userIP = data.ip;
-                ipAddressElement.textContent = userIP;
-            })
-            .catch(error => {
-                console.error("Error getting user's IP address: ", error);
+    function fetchUserLocation() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                displayLocationOnMap(latitude, longitude);
+                fetchPincode(latitude, longitude);
             });
+        } else {
+            locationElement.textContent = "Location not available";
+            console.error("Geolocation is not supported by the browser.");
+        }
     }
 
-    function fetchUserInformation(userIP) {
-        fetch(`https://ipapi.co/${userIP}/json/`)
+    function fetchPincode(latitude, longitude) {
+        // You can use a reverse geocoding service to get the pincode based on latitude and longitude.
+        // Here, we are using a placeholder URL. Replace it with a suitable reverse geocoding API.
+        const reverseGeocodingUrl = `https://api.example.com/reverse-geocoding?lat=${latitude}&long=${longitude}`;
+
+        fetch(reverseGeocodingUrl)
             .then(response => response.json())
             .then(data => {
-                locationElement.textContent = data.city ? data.city + ', ' + data.region + ', ' + data.country_name : "Location not available";
-                timezoneElement.textContent = data.timezone ? data.timezone : "Timezone not available";
-                
-                // Set the pincode automatically based on the user's location data
-                const pincode = data.postal;
-                
-                // Display the user's location on Google Maps
-                displayLocationOnMap(data.latitude, data.longitude);
-
-                fetchPostOffices(pincode);
+                if (data.pincode) {
+                    fetchPostOffices(data.pincode);
+                } else {
+                    locationElement.textContent = "Location not available";
+                    console.error("Pincode not found in reverse geocoding data.");
+                }
             })
             .catch(error => {
-                console.error("Error fetching IP information: ", error);
+                locationElement.textContent = "Location not available";
+                console.error("Error fetching reverse geocoding data: ", error);
             });
     }
 
@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 displayPostOffices(postOfficesData, postOfficeList);
             })
             .catch(error => {
+                locationElement.textContent = "Location not available";
                 console.error("Error fetching post offices: ", error);
             });
     }

@@ -1,0 +1,57 @@
+Post Office Locator Application
+Overview
+
+The Post Office Locator Application is a web-based tool that allows users to extract information about the nearest post offices based on their location. The application provides details about the user's IP address, geolocation, and nearby post offices. It includes two main pages: the index page for user interaction and initiation, and the main page displaying detailed information.
+Features
+
+    User IP Address Display: The application displays the user's current IP address on the index page.
+
+    Geolocation: By clicking the "Get Started" button, the application fetches the user's geolocation using the browser's built-in navigator.geolocation API.
+
+    Main Page Display: After fetching the geolocation, the user is redirected to the main page, where detailed information is displayed.
+
+    Map Integration: The main page includes a map showcasing the user's current location using Google Maps.
+
+    Post Office Information: The application fetches information about nearby post offices based on the user's postal code and displays it in a user-friendly format.
+
+    Search Functionality: Users can search for specific post offices by name using the search input.
+
+    Loading Animation: While data is being fetched, a loading animation is displayed to enhance the user experience.
+
+Project Structure
+
+    index.html: The main HTML file for the index page.
+    main.html: The main HTML file for the detailed information page.
+    style.css: The stylesheet containing the application's styling.
+    js/script.js: JavaScript file for the index page logic.
+    js/main.js: JavaScript file for the main page logic.
+
+Usage
+
+    Open index.html in a web browser to access the index page.
+    Click the "Get Started" button to initiate the application.
+    Grant location access if prompted.
+    The application will redirect you to main.html, displaying detailed information and a map.
+
+Dependencies
+
+    Font Awesome: Used for icons. (Link provided in main.html head)
+
+APIs Used
+
+    IPify API: Fetches the user's IP address.
+    ipapi.co: Retrieves geolocation information based on the user's IP address.
+    Postal PIN Code API: Fetches information about post offices based on the postal code.
+
+Development
+
+    Clone the repository.
+    Customize the application as needed.
+    For security reasons, consider using your own API keys if necessary.
+    Test the application thoroughly.
+
+Acknowledgments
+
+    Icons by Font Awesome.
+    Geolocation services by IPify and ipapi.co.
+    Postal code information by Postal PIN Code API.
